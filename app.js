@@ -5,10 +5,79 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
+
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+
+    const pickSide = []
+
+async function nextUp() {
+        let newEmployee =  await
+            inquirer.prompt([
+                {
+                    type: 'list',
+                    name: 'side',
+                    message: 'Add new employee',
+                    choices: ['Intern', 'Engineer', 'none']
+                }
+            ]);
+        if (newEmployee.fetchAsyncQuestionProperty.choices === ['Intern']) {
+            inquirer.prompt([
+                {}
+            ])
+                .then(function (answers) {
+                    let Intern = new Intern(answers.name, answers.id, answers.email, answers.school);
+                    pickSide.push(Intern);
+                })
+                .catch(function (err) {
+                    console.log(err)
+                })
+        } else if (newEmployee.fetchAsyncQuestionProperty.choices === ['Engineer']) {
+            inquirer.prompt([
+                {}
+
+            ])
+                .then(function (answers) {
+                    let Engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
+                    pickSide.push(Engineer);
+                })
+                .catch(function (err) {
+                    console.log(err)
+                })
+        } else writeFile()
+
+        {
+            function writeFile() {
+                fs.writeFileSync(outputPath, render(pickSide), 'utf-8')
+
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Write code to use inquirer to gather information about the development team members,
