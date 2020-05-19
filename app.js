@@ -1,3 +1,5 @@
+
+
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -11,50 +13,161 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-    const pickSide = []
+const mainAnswers = []
 
-async function nextUp() {
-        let newEmployee =  await
-            inquirer.prompt([
-                {
-                    type: 'list',
-                    name: 'side',
-                    message: 'Add new employee',
-                    choices: ['Intern', 'Engineer', 'none']
-                }
-            ]);
-        if (newEmployee.fetchAsyncQuestionProperty.choices === ['Intern']) {
-            inquirer.prompt([
-                {}
-            ])
-                .then(function (answers) {
-                    let Intern = new Intern(answers.name, answers.id, answers.email, answers.school);
-                    pickSide.push(Intern);
-                })
-                .catch(function (err) {
-                    console.log(err)
-                })
-        } else if (newEmployee.fetchAsyncQuestionProperty.choices === ['Engineer']) {
-            inquirer.prompt([
-                {}
+teamOptions();
 
-            ])
-                .then(function (answers) {
-                    let Engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
-                    pickSide.push(Engineer);
-                })
-                .catch(function (err) {
-                    console.log(err)
-                })
-        } else writeFile()
+let teamSelect;
 
+
+function teamOptions() {
+    inquirer.prompt ([
         {
-            function writeFile() {
-                fs.writeFileSync(outputPath, render(pickSide), 'utf-8')
-
-            }
+            type: 'list',
+            name: 'team',
+            message: 'Who are we adding today?',
+            choices: [
+                'manager',
+                'engineer',
+                'intern',
+                'Nobody'
+            ]
         }
-    }
+
+    ]
+        )
+        .then (answers => {
+            teamSelect = answers;
+            if (teamSelect.team === 'manager') {
+                inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'name',
+                        message: 'Enter new manager name'
+
+                    },
+                    {
+                        type: 'input',
+                        name: 'id',
+                        message: 'Enter new manager ID'
+                    },
+                    {
+                        type: 'input',
+                        name: 'email',
+                        message: 'Enter new manager email',
+
+                    },
+                    {
+                        type: 'input',
+                        name: 'officeNumber',
+                        message: 'Enter new manager office number'
+                    },
+                ])
+                    .then (function (answers) {
+                        const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+                        mainAnswers.push(manager);
+                        teamOptions();
+
+                    })
+                    .catch(function (err) {
+                        console.log(error)
+
+                    })
+
+            } else if (teamSelect.team === 'engineer') {
+
+                inquirer.prompt([
+                    {
+                        type: 'input',
+                        name: 'name',
+                        message: 'Enter new engineer name'
+                    },
+                    {
+                        type: 'input',
+                        name: 'id',
+                        message: 'Enter new engineer ID'
+                    },
+                    {
+                        type: 'input',
+                        name: 'email',
+                        message: 'Enter new engineer email'
+                    },
+                    {
+                        type: 'input',
+                        name: 'github',
+                        message: 'Enter new engineer github'
+                    }
+                ])
+
+                    .then (function (answers) {
+                        const engineer = new Engineer(answers.name, answers.id, answers.email, answers.officeNumber);
+                        mainAnswers.push(Engineer);
+                        teamOptions();
+
+                    })
+                    .catch(function (err) {
+                        console.log(error)
+                    })
+            }
+            else if (teamSelect.team === 'intern') {
+                inquirer.prompt ([
+                    {
+                        type: 'input',
+                        name: 'name',
+                        message: 'Enter new intern name'
+                    },
+                    {
+                        type: 'input',
+                        name: 'id',
+                        message: 'Enter new intern ID',
+                    },
+                    {
+                        type: 'input',
+                        name: 'email',
+                        message: 'Enter new intern email',
+
+                    },
+                    {
+                        type: 'input',
+                        name: 'github',
+                        message: 'Enter new intern college'
+                    }
+                ])
+                    .then (function (answers) {
+                        const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
+                        mainAnswers.push(intern);
+                        teamOptions();
+
+                    })
+                    .catch(function (err) {
+                        console.log(error);
+
+                    })
+            }
+            else if (teamSelect.team === 'nobody') {
+
+             let html = render(mainAnswers);
+
+                fs.writeFile(outputPath, html, function (err) {
+
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+}
+render()
+
+
+
+
+
+
+
+
+
+
 
 
 
