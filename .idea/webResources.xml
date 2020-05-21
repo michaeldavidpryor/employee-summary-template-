@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebResourcesPaths">
+    <contentEntries>
+      <entry url="file://$PROJECT_DIR$">
+        <entryData>
+          <resourceRoots>
+            <path value="file://$PROJECT_DIR$" />
+            <path value="file://$PROJECT_DIR$/node_modules" />
+            <path value="file://$PROJECT_DIR$/node_modules/request" />
+            <path value="file://$PROJECT_DIR$/node_modules/request-promise-core" />
+            <path value="file://$PROJECT_DIR$/node_modules/request-promise-native" />
+            <path value="file://$PROJECT_DIR$/node_modules/require-directory" />
+            <path value="file://$PROJECT_DIR$/node_modules/require-main-filename" />
+            <path value="file://$PROJECT_DIR$/node_modules/resolve" />
+            <path value="file://$PROJECT_DIR$/node_modules/run-async" />
+            <path value="file://$PROJECT_DIR$/node_modules/npm-run-path" />
+            <path value="file://$PROJECT_DIR$/node_modules/node-modules-regexp" />
+            <path value="file://$PROJECT_DIR$/node_modules/json5" />
+            <path value="file://$PROJECT_DIR$/node_modules/json-stringify-safe" />
+            <path value="file://$PROJECT_DIR$/node_modules/json-schema-traverse" />
+            <path value="file://$PROJECT_DIR$/node_modules/json-schema" />
+            <path value="file://$PROJECT_DIR$/node_modules/debug" />
+          </resourceRoots>
+        </entryData>
+      </entry>
+    </contentEntries>
+  </component>
+</project>
